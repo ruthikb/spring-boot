@@ -8,7 +8,9 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -31,6 +33,7 @@ public class UserServiceImpl implements UserService {
         Optional<UserEntity> userEntity = userRepo.findById(id);
         if (userEntity.isEmpty()) {
             return null;
+
 
         }
         UserEntity entity = userEntity.get();
@@ -66,5 +69,21 @@ public class UserServiceImpl implements UserService {
         userRepo.deleteById(id);
         return true;
     }
+
+
+    @Override
+    public List<UserDto> createUsers(List<UserDto> userdtos) {
+        return userRepo.saveAll(userdtos.stream().map(dto -> {
+                            UserEntity entity = new UserEntity();
+                            BeanUtils.copyProperties(dto, entity);
+                            return entity;
+                        })
+                        .collect(Collectors.toList())).stream().map(entity -> {
+                    UserDto dto = new UserDto();
+                    BeanUtils.copyProperties(entity, dto);
+                    return dto;
+                }).collect(Collectors.toList());
+    }
+
 
 }
