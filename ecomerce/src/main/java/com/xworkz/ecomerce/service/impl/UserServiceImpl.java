@@ -8,9 +8,9 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -72,17 +72,18 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public List<UserDto> createUsers(List<UserDto> userdtos) {
-        return userRepo.saveAll(userdtos.stream().map(dto -> {
-                            UserEntity entity = new UserEntity();
-                            BeanUtils.copyProperties(dto, entity);
-                            return entity;
-                        })
-                        .collect(Collectors.toList())).stream().map(entity -> {
-                    UserDto dto = new UserDto();
-                    BeanUtils.copyProperties(entity, dto);
-                    return dto;
-                }).collect(Collectors.toList());
+    public List<UserDto> createUsers(List<UserDto> userDtos) {
+        List<UserEntity> userEntities = new ArrayList<>();
+        for(UserDto dto : userDtos){
+            UserEntity userEntity = new UserEntity();
+            BeanUtils.copyProperties(dto,userEntity);
+            userEntities.add(userEntity);
+        }
+        List<UserEntity> userEntities1 = userRepo.saveAll(userEntities);
+        if (userEntities1.isEmpty()){
+            return null;
+        }
+        return userDtos;
     }
 
 
