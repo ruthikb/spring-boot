@@ -2,27 +2,55 @@ package com.xworkz.ecomerce.controller;
 
 import com.xworkz.ecomerce.dto.UserDto;
 import com.xworkz.ecomerce.service.UserService;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/ListOfUsers")
+@AllArgsConstructor
 public class UsersController {
 
     @Autowired
     UserService userService;
 
-    @PostMapping("")
-        public ResponseEntity<List<UserDto>> createListOfUsers(@RequestBody List < UserDto> userdtos) {
-            List<UserDto> listOfUsers = userService.createUsers(userdtos);
-            return new ResponseEntity<>(listOfUsers, HttpStatus.OK);
+    @PostMapping()
+        public ResponseEntity<String > createListOfUsers(@RequestBody List<UserDto> userdtos) {
+        if (userdtos == null ||userdtos.isEmpty()){
+            return ResponseEntity.badRequest().body("User list is empty");
+        }
+            boolean isUsersSaved = userService.createUsers(userdtos);
+            if (!isUsersSaved){
+                return ResponseEntity.badRequest().body("Failed to create users");
+            }else return ResponseEntity.ok("Users created successfully");
 
     }
+
+    @PutMapping()
+    public ResponseEntity<String> updateListOfUsers(@RequestBody List<UserDto> userdtos) {
+        if (userdtos == null ||userdtos.isEmpty()){
+            return ResponseEntity.badRequest().body("User list is empty");
+        }
+        ArrayList<String >strings=userService.updateUsers(userdtos);
+        if (strings.isEmpty()){
+            return ResponseEntity.badRequest().body("Failed to update users");
+        }else return ResponseEntity.ok("Users updated successfully: "+strings);
+
+    }
+    @DeleteMapping()
+    public ResponseEntity<String> deleteAllUsers(@RequestBody List<Integer> ids) {
+        if (ids == null || ids.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("no users provided");
+        }
+        String result = userService.deleteUsers(ids);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(" could not delete Id " + result);
+
+    }
+
 }

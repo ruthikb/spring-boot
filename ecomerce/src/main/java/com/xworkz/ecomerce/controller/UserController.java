@@ -17,7 +17,7 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @PostMapping("")
+    @PostMapping
     public ResponseEntity<String> registerUser(@Valid @RequestBody UserDto userDto, BindingResult result) {
         System.err.println(userDto);
         if (result.hasErrors()) {
@@ -34,7 +34,7 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(message);
         }
     }
-    @GetMapping("{id}")
+    @GetMapping
     public  ResponseEntity<UserDto> getUser(@PathVariable("id") int id){
         UserDto user = userService.getUserById(id);
         System.err.println(user);
@@ -44,7 +44,7 @@ public class UserController {
         }
         return ResponseEntity.ok(user);
     }
-    @PutMapping("{id}")
+    @PutMapping
     public  ResponseEntity<UserDto>updateUser(@PathVariable("id")int id,@RequestBody UserDto userDto){
         UserDto userDto1=userService.updateUser(id,userDto );
         if (userDto1==null){
@@ -52,7 +52,7 @@ public class UserController {
         }
         return ResponseEntity.ok(userDto1);
     }
-    @DeleteMapping("{id}")
+    @DeleteMapping
     public  ResponseEntity<UserDto> deleteUser(@PathVariable("id")int id){
       boolean delete=  userService.deleteUser(id);
       if (!delete){

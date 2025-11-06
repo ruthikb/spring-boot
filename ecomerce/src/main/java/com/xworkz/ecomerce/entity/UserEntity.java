@@ -8,7 +8,8 @@ import org.hibernate.annotations.GeneratorType;
 @Entity
 @Data
 public class UserEntity {
-    @Id
+
+  @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 

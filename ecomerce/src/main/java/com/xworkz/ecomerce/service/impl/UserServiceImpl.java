@@ -1,5 +1,4 @@
 package com.xworkz.ecomerce.service.impl;
-
 import com.xworkz.ecomerce.dto.UserDto;
 import com.xworkz.ecomerce.entity.UserEntity;
 import com.xworkz.ecomerce.repositry.UserRepo;
@@ -70,21 +69,53 @@ public class UserServiceImpl implements UserService {
         return true;
     }
 
-
     @Override
-    public List<UserDto> createUsers(List<UserDto> userDtos) {
+    public boolean createUsers(List<UserDto> userdtos) {
+        if (userdtos == null || userdtos.isEmpty()) {
+            return false;
+        }
         List<UserEntity> userEntities = new ArrayList<>();
-        for(UserDto dto : userDtos){
+        for(UserDto userDto : userdtos){
             UserEntity userEntity = new UserEntity();
-            BeanUtils.copyProperties(dto,userEntity);
+            BeanUtils.copyProperties(userDto,userEntity);
             userEntities.add(userEntity);
         }
-        List<UserEntity> userEntities1 = userRepo.saveAll(userEntities);
-        if (userEntities1.isEmpty()){
-            return null;
-        }
-        return userDtos;
+        userRepo.saveAll(userEntities);
+        return  true;
     }
+
+    @Override
+    public ArrayList<String> updateUsers(List<UserDto> userdtos) {
+        ArrayList<String> ids = new  ArrayList<>();
+        for (UserDto dto:userdtos){
+            Optional<UserEntity> userEntity = userRepo.findById(dto.getId());
+            if (userEntity.isPresent()) {
+                UserEntity entity = userEntity.get();
+                entity.setFirstName(dto.getFirstName());
+                entity.setLastName(dto.getLastName());
+                entity.setEmail(dto.getEmail());
+                entity.setPhoneNo(dto.getPhoneNo());
+                entity.setAddress(dto.getAddress());
+                entity.setPassword(dto.getPassword());
+
+                UserEntity saved = userRepo.save(entity);
+                ids.add("Updated user with ID: " + saved.getId());
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public String deleteUsers(List<Integer> ids) {
+        for (Integer id : ids) {
+            if (userRepo.existsById(id)) {
+                userRepo.deleteById(id);
+            }
+        }
+
+        return "";
+    }
+
 
 
 }
