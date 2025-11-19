@@ -1,4 +1,4 @@
-package com.xworkz.ecomerce.entity;
+package com.xworkz.ecomerce.mysql.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;

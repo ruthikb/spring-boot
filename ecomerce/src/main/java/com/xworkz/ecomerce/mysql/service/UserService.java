@@ -1,6 +1,6 @@
-package com.xworkz.ecomerce.service;
+package com.xworkz.ecomerce.mysql.service;
 
-import com.xworkz.ecomerce.dto.UserDto;
+import com.xworkz.ecomerce.mysql.dto.UserDto;
 import jakarta.validation.Valid;
 
 import java.util.ArrayList;

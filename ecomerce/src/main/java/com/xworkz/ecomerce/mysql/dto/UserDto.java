@@ -1,4 +1,4 @@
-package com.xworkz.ecomerce.dto;
+package com.xworkz.ecomerce.mysql.dto;
 
 import jakarta.annotation.Nonnull;
 import lombok.AllArgsConstructor;

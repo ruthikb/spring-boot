@@ -1,8 +1,7 @@
-package com.xworkz.ecomerce.controller;
+package com.xworkz.ecomerce.mysql.controller;
 
-import com.xworkz.ecomerce.dto.UserDto;
-import com.xworkz.ecomerce.service.UserService;
-import jakarta.validation.Valid;
+import com.xworkz.ecomerce.mysql.dto.UserDto;
+import com.xworkz.ecomerce.mysql.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

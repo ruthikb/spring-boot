@@ -1,6 +1,6 @@
-package com.xworkz.ecomerce.repositry;
+package com.xworkz.ecomerce.mysql.repository;
 
-import com.xworkz.ecomerce.entity.UserEntity;
+import com.xworkz.ecomerce.mysql.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 

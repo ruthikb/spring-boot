@@ -1,8 +1,8 @@
-package com.xworkz.ecomerce.service.impl;
-import com.xworkz.ecomerce.dto.UserDto;
-import com.xworkz.ecomerce.entity.UserEntity;
-import com.xworkz.ecomerce.repositry.UserRepo;
-import com.xworkz.ecomerce.service.UserService;
+package com.xworkz.ecomerce.mysql.service.impl;
+import com.xworkz.ecomerce.mysql.dto.UserDto;
+import com.xworkz.ecomerce.mysql.entity.UserEntity;
+import com.xworkz.ecomerce.mysql.repository.UserRepo;
+import com.xworkz.ecomerce.mysql.service.UserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
