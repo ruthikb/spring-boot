@@ -22,4 +22,6 @@ public interface CustomerMapper {
     
     CustomerDto auditLogEntityToAuditLogDto(CustomerEntity entity);
 
+
+
 }
