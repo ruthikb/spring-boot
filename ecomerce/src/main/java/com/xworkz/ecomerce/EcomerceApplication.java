@@ -8,8 +8,7 @@ import org.springframework.cache.annotation.EnableCaching;
 @EnableCaching
 public class EcomerceApplication {
 
-	public static void main(String[] args)
-	{
+	public static void main(String[] args) {
 		SpringApplication.run(EcomerceApplication.class, args);
 	}
 

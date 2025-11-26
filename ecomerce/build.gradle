@@ -42,6 +42,10 @@ dependencies {
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 	implementation 'org.springframework.boot:spring-boot-starter-cache'
 	implementation 'org.ehcache:ehcache:3.10.8' // Use latest version
+	implementation 'javax.cache:cache-api:1.1.1'
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'javax.cache:cache-api:1.1.1'
+	
 
 
 }

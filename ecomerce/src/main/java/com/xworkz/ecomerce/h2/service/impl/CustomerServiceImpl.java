@@ -8,6 +8,8 @@ import com.xworkz.ecomerce.h2.mapper.CustomerMapper;
 import com.xworkz.ecomerce.h2.service.CustomerService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.Cache;
+import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -27,6 +29,9 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
     private CustomerRepository repo;
+
+    @Autowired
+    CacheManager cacheManager;
 
 
     @Override
@@ -49,8 +54,6 @@ public class CustomerServiceImpl implements CustomerService {
     public void deleteUser(long id) {
         repo.deleteById(id);
     }
-
-
 
 
 }
