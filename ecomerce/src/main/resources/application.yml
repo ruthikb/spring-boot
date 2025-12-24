@@ -1,0 +1,64 @@
+spring:
+  datasource:
+    mysql:
+      jdbc-url: jdbc:mysql://localhost:3306/springbootdb
+      username: root
+      password: Kruthik@1
+      driver-class-name: com.mysql.cj.jdbc.Driver
+
+    h2:
+      jdbc-url: jdbc:h2:file:./data/testdb
+      username: sa
+      password:
+      driver-class-name: org.h2.Driver
+
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 10
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+      pool-name: HikariPool
+      initialization-fail-timeout: -1
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true
+        show_sql: false
+        jdbc:
+          time_zone: UTC
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+  cache:
+    type: caffeine                     # Enable caffeine cache
+    cache-names:
+      - userCache                      # your @Cacheable(value="userCache")
+      - allUsersCache                  # optional if you cache list of users
+    caffeine:
+      spec: maximumSize=500, expireAfterWrite=10m   # cache entries auto expire in 10 mins
+
+server:
+  port: 8090
+
+logging:
+  level:
+    org:
+      springframework: INFO
+      hibernate: WARN
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
