@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Cacheable("HarshaCache")
+    @Cacheable("KruthikCache")
     public List<UserDto> findAll() {
         log.info("findAll() called - fetching users");
         System.out.println("running inside findAll...");
@@ -89,7 +89,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @CacheEvict(value = "HarshaCache", allEntries = true)
+    @CacheEvict(value = "KruthikCache", allEntries = true)
     public void deleteUser(int id) {
         log.info("deleteUser() called with id={}", id);
         repository.deleteById(id);
@@ -97,7 +97,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @CacheEvict(value = "HarshaCache", allEntries = true)
+    @CacheEvict(value = "KruthikCache", allEntries = true)
     public String updateUser(UserDto dto) {
         log.info("updateUser() started for userId={}", dto.getUpdateId());
 

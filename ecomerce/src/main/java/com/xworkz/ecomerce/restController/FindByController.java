@@ -19,7 +19,7 @@ import java.util.NoSuchElementException;
 @RestController
 @RequestMapping("/")
 @Transactional
-public class FindByController {
+public class  FindByController {
 
     private final FindByService findByService;
 
