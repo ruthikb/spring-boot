@@ -14,6 +14,7 @@ public class DefaultController {
     @GetMapping("")
     public  String defaultController(){
         logger.info("Running default controller");
+
         return "Welcome to Ecomerce Application";
     }
 
